@@ -4,10 +4,10 @@ using System.Text;
 
 class H03bT05
 {
-    static void Main(string[] args)
+    static void Main()
     {
         Console.OutputEncoding = Encoding.UTF8;
-        // Vaihdetaan kulttuuri suomeksi
+        // Changing cultural info to match Finnish standards
         CultureInfo culture;
         if (Thread.CurrentThread.CurrentCulture.Name == "fi-Fi")
             culture = CultureInfo.CreateSpecificCulture("en-US");
@@ -17,23 +17,30 @@ class H03bT05
         Thread.CurrentThread.CurrentCulture = culture;
         Thread.CurrentThread.CurrentUICulture = culture;
 
-        // varsinainen pääohjelma
+        // The actual main program
 
-        int pts, i, y;
+        // Read user input
+        Console.Write("Insert the circle radius (cm): ");
+        double radius = double.Parse(Console.ReadLine());
 
-        // Luetaan syöte
-        Console.Write("Anna ympyrän säteen pituus (cm): ");
-        double sade = int.Parse(Console.ReadLine());
+        // Here we start to do the maths. Firstly, the program provides the areas of circle and outer square.
+        double circle = Math.PI * (Math.Pow(radius, 2));
+        double sqrOut = Math.Pow((radius * 2), 2);
 
-        //Laskutoimitukset
-        double ympyra = Math.PI * (Math.Pow(sade, 2));
-        double katA = Math.Sqrt(sade * (sade / 2));
+        // Then the program calculates the outer green area
+        double outerGreenArea = sqrOut - circle;
 
-        double sqrIn = Math.Pow((katA * 2), 2);
+        // Calculates cathetus. Then program calculates area of the inner square
+        double cathA = Math.Sqrt(radius * (radius / 2));
+        double sqrIn = Math.Pow((cathA * 2), 2);
 
-        //sqrIn = ympyra - katA;
+        // Addition of the green areas
+        double greenAreaTot = outerGreenArea + sqrIn;
 
-        double sqrOut = Math.Pow((sade * 2), 2);
-        sqrOut = s - ympyra;
+        // Finally, the program prints the results
+
+        Console.WriteLine("The outer green area is: "+ Math.Round(outerGreenArea, 2) + " square cm");
+        Console.WriteLine("The smaller green square's area is " + Math.Round(sqrIn, 2) + " square cm");
+        Console.WriteLine("Total green area: " + Math.Round(greenAreaTot, 2) + " square cm");
     }
 }
