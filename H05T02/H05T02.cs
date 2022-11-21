@@ -11,7 +11,7 @@ class Kirja
     private double kappalehinta;
     private string teema;
 
-    //Seuraavassa määritellään oletusmuodostin ilman 
+    //Seuraavassa määritellään oletusmuodostin (constructor) ilman 
     //parametreja. Metodissa parametreille annetaan omat
     //oletusarvot. 
     public Kirja()
@@ -46,12 +46,18 @@ class Kirja
         this.teema = kirja1.teema;
     }
 
-    public void VertaaKirja(Kirja kirja4)
+    // VertaaKirja-metodin määrittely.
+    public string VertaaKirja(Kirja kirja2)
     {
-        if (this.kappalehinta > kirja4.kappalehinta)
-            Console.WriteLine(this.nimi + " on kalliimpi kuin " + kirja4.nimi);    
+        if (this.kappalehinta > kirja2.kappalehinta)
+            return
+                this.nimi + " on kalliimpi kuin " + kirja2.nimi;  
+        if (this.kappalehinta == kirja2.kappalehinta)
+            return
+                this.nimi + " on saman hintainen kuin " + kirja2.nimi;
         else
-            Console.WriteLine(this.nimi + " on halvempi kuin " + kirja4.nimi);
+            return
+                this.nimi + " on halvempi kuin " + kirja2.nimi;
     }
 
     public void TulostaTiedot()
@@ -99,9 +105,12 @@ class H05T02
         var kirja3 = new Kirja();
         kirja3.TulostaTiedot();
 
+        //Tässä luodaan kirja4-olio.
         var kirja4 = new Kirja("Tuntematon Sotilas", "Väinö Linna", "WSOY", 29.70, "Sotakirjallisuus");
         kirja4.TulostaTiedot();
 
-        kirja4.VertaaKirja(kirja2);
+        // Kutsutaan VertaaKirja-metodia, jossa verrataan "kirj4"-oliota "kirja2"-olioon.
+        Console.WriteLine("\t"+kirja4.VertaaKirja(kirja2));
+
     }
 }
